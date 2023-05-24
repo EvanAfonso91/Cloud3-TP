@@ -10,9 +10,13 @@ function readCSV($csvFile) {
     return $line_of_text;
 }
 
+
 $uploadDir = 'c:\\temp\\uploads\\';
-$csvFile = $uploadDir.'data.db';
-$lines = readCSV($csvFile);
+if (!file_exists($uploadDir)) {
+    echo 'Folder does not exist';
+} else {
+    $csvFile = $uploadDir.'data.db';
+    $lines = readCSV($csvFile);
 
 for ($i = 0; $i < sizeof($lines); $i++) {
     $line = $lines[$i];
@@ -32,4 +36,6 @@ for ($i = 0; $i < sizeof($lines); $i++) {
         echo $decrypted;
         break;
     }
+}
+
 }

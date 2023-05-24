@@ -1,13 +1,13 @@
 <?php
 require_once 'crypt.req.php';
 
-if (
-    isset($_FILES['fileToUpload'])
-    && $_FILES['fileToUpload']['error'] === UPLOAD_ERR_OK
-) {
+if (isset($_FILES['fileToUpload']) && ($_FILES['fileToUpload']['error'] === UPLOAD_ERR_OK)) {
+    $upload_dir = "c:\\temp\\uploads\\";
+    if (!file_exists($uploadDir)) {
+        echo 'Folder does not exist';
+    } else {
     $name = basename($_FILES['fileToUpload']['name']);
     $guid = uniqid() . '-' . uniqid();
-    $upload_dir = "c:\\temp\\uploads\\";
     // télécharger le fichier en tant que .tmp
     $tmpFile = $upload_dir . $guid . ".tmp";
     move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $tmpFile);
@@ -31,4 +31,5 @@ if (
     echo "<p>or use this think :</p>";
     echo "<p>https://localhost/benjamin.egon/be-bookstore2/cloud2/download.php?guid=$guid</p>";
     echo "<p><a href=\"index.php\">Back to home</a></p>";
+}
 }
